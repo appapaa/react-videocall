@@ -12,8 +12,11 @@ function CallWindow({ peerSrc, localSrc, config, mediaDevice, status, endCall })
   const [audio, setAudio] = useState(config.audio);
 
   useEffect(() => {
-    if (peerVideo.current && peerSrc) peerVideo.current.srcObject = peerSrc;
-    if (localVideo.current && localSrc) localVideo.current.srcObject = localSrc;
+    setTimeout(() => {
+      console.log(peerSrc);
+      if (peerVideo.current && peerSrc) peerVideo.current.srcObject = peerSrc;
+      if (localVideo.current && localSrc) localVideo.current.srcObject = localSrc;
+    }, 10000);
   });
 
   useEffect(() => {
