@@ -55,7 +55,10 @@ class MediaDevice extends Emitter {
     navigator.mediaDevices
       .getDisplayMedia({
         video: {
-          cursor: 'always'
+          minWidth: 1280,
+          minHeight: 720,
+          cursor: 'always',
+          minFrameRate: 60,
         }, audio: false
       })
       .then((stream) => {
@@ -63,14 +66,6 @@ class MediaDevice extends Emitter {
         this.emit('newstream', stream);
       })
     return this;
-  }
-  getLocalScreenCaptureStream() {
-    try {
-      const constraints = { video: { cursor: 'always' }, audio: true };
-      return navigator.mediaDevices.getDisplayMedia(constraints);
-    } catch (error) {
-      console.error('failed to get local screen', error);
-    }
   }
   /**
    * Stop all media track of devices
