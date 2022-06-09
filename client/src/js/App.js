@@ -32,8 +32,7 @@ class App extends Component {
         if (data.sdp) {
           this.pc.setRemoteDescription(data.sdp);
           if (data.sdp.type === 'offer') this.pc.createAnswer();
-        } else setTimeout(() =>
-          this.pc.addIceCandidate(data.candidate), 4000)
+        } else this.pc.addIceCandidate(data.candidate)
       })
       .on('end', this.endCall.bind(this, false))
       .emit('init');

@@ -103,7 +103,7 @@ class PeerConnection extends Emitter {
   addIceCandidate(candidate) {
     if (candidate) {
       const iceCandidate = new RTCIceCandidate(candidate);
-      setTimeout(() => this.pc.addIceCandidate(iceCandidate), 4000);
+      this.pc.addIceCandidate(iceCandidate)
     }
     return this;
   }
