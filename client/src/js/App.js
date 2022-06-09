@@ -32,7 +32,9 @@ class App extends Component {
         if (data.sdp) {
           this.pc.setRemoteDescription(data.sdp);
           if (data.sdp.type === 'offer') this.pc.createAnswer();
-        } else this.pc.addIceCandidate(data.candidate);
+        } else {
+          setTimneout(() => this.pc.addIceCandidate(data.candidate), 1000)
+        }
       })
       .on('end', this.endCall.bind(this, false))
       .emit('init');
@@ -84,7 +86,7 @@ class App extends Component {
             mediaDevice={this.pc.mediaDevice}
             endCall={this.endCallHandler}
           />
-        ) }
+        )}
         <CallModal
           status={callModal}
           startCall={this.startCallHandler}
