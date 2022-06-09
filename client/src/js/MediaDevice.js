@@ -55,12 +55,11 @@ class MediaDevice extends Emitter {
     navigator.mediaDevices
       .getDisplayMedia({
         video: {
-          minWidth: 1920,
-          minHeight: 1080,
+          minWidth: 1280,
+          minHeight: 720,
           cursor: 'always',
           minFrameRate: 60,
-        },
-        audio: false
+        }, audio: false
       })
       .then((stream) => {
         this.stream = stream;
