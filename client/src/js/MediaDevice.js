@@ -51,6 +51,19 @@ class MediaDevice extends Emitter {
     }
     return this;
   }
+  toggleShare() {
+    navigator.mediaDevices
+      .getDisplayMedia({
+        video: {
+          cursor: 'always'
+        }, audio: false
+      })
+      .then((stream) => {
+        this.stream = stream;
+        this.emit('newstream', stream);
+      })
+    return this;
+  }
   getLocalScreenCaptureStream() {
     try {
       const constraints = { video: { cursor: 'always' }, audio: true };

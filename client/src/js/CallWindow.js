@@ -10,6 +10,7 @@ function CallWindow({ peerSrc, localSrc, config, mediaDevice, status, endCall })
   const localVideo = useRef(null);
   const [video, setVideo] = useState(config.video);
   const [audio, setAudio] = useState(config.audio);
+  const [share, setShare] = useState(config.share);
 
   useEffect(() => {
     if (peerVideo.current && peerSrc) peerVideo.current.srcObject = peerSrc;
@@ -17,7 +18,7 @@ function CallWindow({ peerSrc, localSrc, config, mediaDevice, status, endCall })
   });
 
   useEffect(() => {
-    if (mediaDevice) {
+    if (mediaDevice && !share) {
       mediaDevice.toggle('Video', video);
       mediaDevice.toggle('Audio', audio);
     }
@@ -28,6 +29,10 @@ function CallWindow({ peerSrc, localSrc, config, mediaDevice, status, endCall })
    * @param {'Audio' | 'Video'} deviceType - Type of the device eg: Video, Audio
    */
   const toggleMediaDevice = (deviceType) => {
+    if (deviceType === 'Share') {
+      setShare(!share);
+      return !share && mediaDevice.toggleShare();
+    }
     if (deviceType === 'Video') {
       setVideo(!video);
     }
@@ -42,6 +47,13 @@ function CallWindow({ peerSrc, localSrc, config, mediaDevice, status, endCall })
       <video id="peerVideo" ref={peerVideo} autoPlay />
       <video id="localVideo" ref={localVideo} autoPlay muted />
       <div className="video-control">
+        <button
+          key="btnShare"
+          title='шаринг'
+          type="button"
+          className={getButtonClass('fa-video-camera', share)}
+          onClick={() => toggleMediaDevice('Share')}
+        />
         <button
           key="btnVideo"
           title='видео'
