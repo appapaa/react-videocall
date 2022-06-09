@@ -17,10 +17,10 @@ class MediaDevice extends Emitter {
       audio: true
     };
 
-    // navigator.mediaDevices
-    //   .getUserMedia(constraints)
     navigator.mediaDevices
-      .getDisplayMedia({ video: { cursor: 'always' }, audio: true })
+      .getUserMedia(constraints)
+      // navigator.mediaDevices
+      //   .getDisplayMedia({ video: { cursor: 'always' }, audio: true })
       .then((stream) => {
         this.stream = stream;
         this.emit('stream', stream);
