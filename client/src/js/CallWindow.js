@@ -58,7 +58,7 @@ function CallWindow({ peerSrc, localSrc, config, mediaDevice, status, endCall })
           className='btn-action'
           onClick={() => {
             showModal(!visible);
-            // mediaDevice.setConstructor({ video: params, audio });
+            mediaDevice.setConstructor({ video: params, audio });
           }}
         >
           <Gear strokeWidth={2} size={24} />

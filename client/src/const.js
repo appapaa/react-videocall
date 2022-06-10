@@ -5,5 +5,4 @@ export const videoParams = {
     maxHeight: 4000,
     minFrameRate: 60,
     maxFrameRate: 140,
-    cursor: 'always',
 };

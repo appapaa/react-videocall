@@ -51,16 +51,46 @@ class MediaDevice extends Emitter {
     return this;
   }
   setConstructor(constraints) {
-    // const track = this.stream.getVideoTracks()[0];
-    // this.stream.getVideoTracks().forEach((track) => {
-    //   track.applyConstraints(constraints);
-    // });
+    const v = constraints.video;
+    this.stream.getVideoTracks()[0].applyConstraints({
+      frameRate: {
+        ideal: v.minFrameRate,
+        max: v.maxFrameRate,
+      },
+      width: {
+        ideal: v.minWidth,
+        max: v.maxWidth,
+      },
+      height: {
+        ideal: v.minHeight,
+        max: v.maxHeight,
+      }
+    });
+
     return this;
   }
   toggleShare(constraints) {
-    console.log(constraints)
+    const v = constraints.video;
+    const c = {
+      ...constraints,
+      video: {
+        frameRate: {
+          ideal: v.minFrameRate,
+          max: v.maxFrameRate,
+        },
+        width: {
+          ideal: v.minWidth,
+          max: v.maxWidth,
+        },
+        height: {
+          ideal: v.minHeight,
+          max: v.maxHeight,
+        },
+        cursor: 'always',
+      }
+    };
     navigator.mediaDevices
-      .getDisplayMedia(constraints)
+      .getDisplayMedia(c)
       .then((stream) => {
         this.stream = stream;
         this.emit('newstream', stream);
