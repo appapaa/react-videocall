@@ -13,6 +13,8 @@
     "@babel/core": "7.17.9",
     "@babel/preset-env": "7.16.11",
     "@babel/preset-react": "7.16.7",
+    "akar-icons": "^1.9.17",
+    "antd": "^4.21.0",
     "babel-loader": "8.2.4",
     "bluebird": "3.7.2",
     "bootstrap-sass": "3.4.1",

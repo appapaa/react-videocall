@@ -34,8 +34,43 @@ body {
 .btn-action {
   outline: none;
   border: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  float: left;
 }
 
+.settings-modal{
+  position: fixed;
+  top:0;
+  bottom: 0;
+  left:-320px;
+  width: 320px;
+  transition: left .3s;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  pointer-events: none;
+  &.-visible{
+    left:0;
+  }
+  &-item{
+    pointer-events: all;
+    background-color: gray;
+    padding: 5px 10px;
+    display: flex;
+    justify-content: space-between;
+    input{
+      color:black;
+    }
+    &:first-child{
+      padding-top: 10px;
+    }
+    &:last-child{
+      padding-bottom: 10px;
+    }
+  }
+}
 
 @import "main-window";
 @import "call-window";

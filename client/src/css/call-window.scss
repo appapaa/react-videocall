@@ -59,6 +59,9 @@
 }
 
 .video-control, .call-modal {
+	display: flex;
+	align-items: center;
+    justify-content: center;
 	.btn-action {
 		$height: 50px;
 		height: $height;

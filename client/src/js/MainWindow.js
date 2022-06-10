@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import socket from './socket';
+import { Camera, Microphone } from 'akar-icons';
 
 function useClientID() {
   const [clientID, setClientID] = useState('');
@@ -54,14 +55,18 @@ function MainWindow({ startCall }) {
         <div>
           <button
             type="button"
-            className="btn-action fa fa-video-camera"
+            className="btn-action"
             onClick={callWithVideo(true)}
-          />
+          >
+            <Camera strokeWidth={2} size={24} />
+          </button>
           <button
             type="button"
-            className="btn-action fa fa-phone"
+            className="btn-action"
             onClick={callWithVideo(false)}
-          />
+          >
+            <Microphone strokeWidth={2} size={24} />
+          </button>
         </div>
       </div>
     </div>

@@ -1,4 +1,5 @@
 import _ from 'lodash';
+import { videoParams } from '../const';
 import Emitter from './Emitter';
 
 /**
@@ -19,8 +20,6 @@ class MediaDevice extends Emitter {
 
     navigator.mediaDevices
       .getUserMedia(constraints)
-      // navigator.mediaDevices
-      //   .getDisplayMedia({ video: { cursor: 'always' }, audio: true })
       .then((stream) => {
         this.stream = stream;
         this.emit('stream', stream);
@@ -51,16 +50,17 @@ class MediaDevice extends Emitter {
     }
     return this;
   }
-  toggleShare() {
+  setConstructor(constraints) {
+    // const track = this.stream.getVideoTracks()[0];
+    // this.stream.getVideoTracks().forEach((track) => {
+    //   track.applyConstraints(constraints);
+    // });
+    return this;
+  }
+  toggleShare(constraints) {
+    console.log(constraints)
     navigator.mediaDevices
-      .getDisplayMedia({
-        video: {
-          minWidth: 1400,
-          minHeight: 800,
-          cursor: 'always',
-          minFrameRate: 60,
-        }, audio: false
-      })
+      .getDisplayMedia(constraints)
       .then((stream) => {
         this.stream = stream;
         this.emit('newstream', stream);

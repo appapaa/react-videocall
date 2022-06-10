@@ -46,6 +46,11 @@ class PeerConnection extends Emitter {
         this.emit('localStream', stream);
         this.createOffer();
       });
+    this.mediaDevice
+      .on('offer', (stream) => {
+        this.emit('localStream', stream);
+        this.createOffer();
+      });
 
     return this;
   }

@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import classnames from 'classnames';
+import { Camera, Phone, Microphone } from 'akar-icons';
 
 function CallModal({ status, callFrom, startCall, rejectCall }) {
   const acceptWithVideo = (video) => {
@@ -15,19 +16,25 @@ function CallModal({ status, callFrom, startCall, rejectCall }) {
       </p>
       <button
         type="button"
-        className="btn-action fa fa-video-camera"
+        className="btn-action"
         onClick={acceptWithVideo(true)}
-      />
+      >
+        <Camera strokeWidth={2} size={24} />
+      </button>
       <button
         type="button"
-        className="btn-action fa fa-phone"
+        className="btn-action"
         onClick={acceptWithVideo(false)}
-      />
+      >
+        <Microphone strokeWidth={2} size={24} />
+      </button>
       <button
         type="button"
-        className="btn-action hangup fa fa-phone"
+        className="btn-action hangup"
         onClick={rejectCall}
-      />
+      >
+        <Phone strokeWidth={2} size={24} />
+      </button>
     </div>
   );
 }

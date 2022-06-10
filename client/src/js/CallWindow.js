@@ -2,8 +2,10 @@
 import React, { useState, useEffect, useRef } from 'react';
 import PropTypes from 'prop-types';
 import classnames from 'classnames';
+import { AirplayVideo, Camera, Gear, Phone, Microphone } from 'akar-icons';
+import { videoParams } from '../const';
 
-const getButtonClass = (icon, enabled) => classnames(`btn-action fa ${icon}`, { disable: !enabled });
+const getButtonClass = (icon, enabled) => classnames(`btn-action ${icon ? 'fa' : ''} ${icon}`, { disable: !enabled });
 
 function CallWindow({ peerSrc, localSrc, config, mediaDevice, status, endCall }) {
   const peerVideo = useRef(null);
@@ -11,6 +13,8 @@ function CallWindow({ peerSrc, localSrc, config, mediaDevice, status, endCall })
   const [video, setVideo] = useState(config.video);
   const [audio, setAudio] = useState(config.audio);
   const [share, setShare] = useState(config.share);
+  const [params, setParams] = useState(videoParams);
+  const [visible, showModal] = useState(false);
 
   useEffect(() => {
     if (peerVideo.current && peerSrc) peerVideo.current.srcObject = peerSrc;
@@ -31,7 +35,7 @@ function CallWindow({ peerSrc, localSrc, config, mediaDevice, status, endCall })
   const toggleMediaDevice = (deviceType) => {
     if (deviceType === 'Share') {
       setShare(!share);
-      return !share && mediaDevice.toggleShare();
+      return !share && mediaDevice.toggleShare({ video: params, audio });
     }
     if (deviceType === 'Video') {
       setVideo(!video);
@@ -49,33 +53,60 @@ function CallWindow({ peerSrc, localSrc, config, mediaDevice, status, endCall })
       <div className="video-control">
         <button
           key="btnShare"
+          title='настройки шаринга'
+          type="button"
+          className='btn-action'
+          onClick={() => {
+            showModal(!visible);
+            // mediaDevice.setConstructor({ video: params, audio });
+          }}
+        >
+          <Gear strokeWidth={2} size={24} />
+        </button>
+        <button
+          key="btnShare"
           title='шаринг'
           type="button"
-          className={getButtonClass('fa-video-camera', share)}
+          className={getButtonClass('', share)}
           onClick={() => toggleMediaDevice('Share')}
-        />
+        >
+          <AirplayVideo strokeWidth={2} size={24} />
+        </button>
         <button
           key="btnVideo"
           title='видео'
           type="button"
-          className={getButtonClass('fa-video-camera', video)}
+          className={getButtonClass('', video)}
           onClick={() => toggleMediaDevice('Video')}
-        />
+        >
+          <Camera strokeWidth={2} size={24} />
+        </button>
         <button
           key="btnAudio"
           title='аудио'
           type="button"
-          className={getButtonClass('fa-microphone', audio)}
+          className={getButtonClass('', audio)}
           onClick={() => toggleMediaDevice('Audio')}
-        />
+        >
+          <Microphone strokeWidth={2} size={24} />
+        </button>
         <button
           type="button"
           title='завершить'
-          className="btn-action hangup fa fa-phone"
+          className="btn-action hangup"
           onClick={() => endCall(true)}
-        />
+        >
+          <Phone strokeWidth={2} size={24} />
+        </button>
       </div>
-    </div>
+      <div className={'settings-modal' + (visible ? ' -visible' : '')}>
+        {_.map(params, (v, key) => <div key={key} className='settings-modal-item'>
+          <span>{key}</span>
+          <input value={v} onChange={({ target: { value } }) =>
+            setParams({ ...params, [key]: +value })} />
+        </div>)}
+      </div>
+    </div >
   );
 }
 
