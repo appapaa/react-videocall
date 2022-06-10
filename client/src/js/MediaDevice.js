@@ -55,8 +55,8 @@ class MediaDevice extends Emitter {
     navigator.mediaDevices
       .getDisplayMedia({
         video: {
-          minWidth: 1280,
-          minHeight: 720,
+          minWidth: 1000,
+          minHeight: 500,
           cursor: 'always',
           minFrameRate: 60,
         }, audio: false
