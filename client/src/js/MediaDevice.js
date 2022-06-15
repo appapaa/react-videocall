@@ -81,8 +81,7 @@ class MediaDevice extends Emitter {
         audio: true
       })
       .then((stream) => {
-        this.stream = stream;
-        this.emit('newstream', stream);
+        this.emit('newstream', stream, this.stream);
       })
     return this;
   }

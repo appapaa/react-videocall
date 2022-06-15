@@ -46,9 +46,12 @@
 		height: 20%;
 	}
 	
-	#peerVideo {
-		width: 100%;
+	#peerVideo, #shareVideo {
+		width: 50%;
 		height: 100%;
+	}
+	#shareVideo{
+		left:50%;
 	}
 }
 

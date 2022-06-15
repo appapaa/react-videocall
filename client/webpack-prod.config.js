@@ -8,6 +8,9 @@ module.exports = {
   entry: {
     app: './src/index.js'
   },
+  stats: {
+    errorDetails: true, // --display-error-details
+  },
   output: {
     filename: 'js/[name].min.js'
   },
