@@ -3,7 +3,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import PropTypes from 'prop-types';
 import classnames from 'classnames';
 import { AirplayVideo, Camera, Gear, Phone, Microphone } from 'akar-icons';
-import { videoParams } from '../const';
+import { defVideoParams } from '../const';
 
 const getButtonClass = (icon, enabled) => classnames(`btn-action ${icon ? 'fa' : ''} ${icon}`, { disable: !enabled });
 
@@ -14,7 +14,7 @@ function CallWindow({ peerSrc, localSrc, config, mediaDevice, status, endCall })
   const [video, setVideo] = useState(config.video);
   const [audio, setAudio] = useState(config.audio);
   const [share, setShare] = useState(config.share);
-  const [params, setParams] = useState(videoParams);
+  const [params, setParams] = useState(defVideoParams);
   const [visible, showModal] = useState(false);
   const videoTracks = peerSrc && peerSrc.getVideoTracks();
   let MediaStream2 = null;

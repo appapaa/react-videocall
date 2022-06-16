@@ -9,3 +9,12 @@ export const videoParams = {
     height: { ideal: 788 },
     // resizeMode: 'crop-and-scale'ы,
 };
+export const defVideoParams = {
+    minWidth: 1400,
+    minHeight: 800,
+    maxWidth: 4000,
+    maxHeight: 4000,
+    minFrameRate: 60,
+    maxFrameRate: 140,
+    // resizeMode: 'crop-and-scale'ы,
+};
