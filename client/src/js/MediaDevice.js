@@ -72,12 +72,7 @@ class MediaDevice extends Emitter {
   toggleShare() {
     navigator.mediaDevices
       .getDisplayMedia({
-        video: {
-          minWidth: 1400,
-          minHeight: 800,
-          cursor: 'always',
-          minFrameRate: 60,
-        },
+        video: videoParams,
         audio: true
       })
       .then((stream) => {

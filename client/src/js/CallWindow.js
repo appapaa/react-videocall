@@ -17,23 +17,12 @@ function CallWindow({ peerSrc, localSrc, config, mediaDevice, status, endCall })
   const [params, setParams] = useState(videoParams);
   const [visible, showModal] = useState(false);
   const videoTracks = peerSrc && peerSrc.getVideoTracks();
-  const audioTracks = peerSrc && peerSrc.getAudioTracks();
-  console.log('src', videoTracks);
-  let MediaStream1 = null;
   let MediaStream2 = null;
-  if (audioTracks || videoTracks) {
-    let arr = [];
-    videoTracks && videoTracks[0] && arr.push(videoTracks[0]);
-    // if (audioTracks) {
-    //   arr = [arr, ...audioTracks];
-    // }
-    MediaStream1 = new MediaStream(arr);
-  }
   if (videoTracks && videoTracks[1]) {
     MediaStream2 = new MediaStream([videoTracks[1]]);
   }
   useEffect(() => {
-    if (peerVideo.current && MediaStream1) peerVideo.current.srcObject = MediaStream1;
+    if (peerVideo.current && peerSrc) peerVideo.current.srcObject = peerSrc;
     if (shareVideo.current && MediaStream2) shareVideo.current.srcObject = MediaStream2;
     if (localVideo.current && localSrc) localVideo.current.srcObject = localSrc;
   });
@@ -66,7 +55,7 @@ function CallWindow({ peerSrc, localSrc, config, mediaDevice, status, endCall })
   return (
     <div className={classnames('call-window', status)}>
       <video id="peerVideo" ref={peerVideo} autoPlay />
-      <video id="shareVideo" ref={shareVideo} autoPlay />
+      <video id="shareVideo" ref={shareVideo} autoPlay controls />
       <video id="localVideo" ref={localVideo} autoPlay muted />
       <div className="video-control">
         <button
