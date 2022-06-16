@@ -52,7 +52,7 @@ class MediaDevice extends Emitter {
   }
   setConstructor(constraints) {
     const v = constraints.video;
-    this.stream.getVideoTracks()[0].applyConstraints({
+    this.stream.getVideoTracks()[1].applyConstraints({
       frameRate: {
         ideal: v.minFrameRate,
         max: v.maxFrameRate,
