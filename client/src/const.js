@@ -5,16 +5,14 @@ export const videoParams = {
     // maxHeight: 4000,
     // maxFrameRate: 140,
     frameRate: { ideal: 60 },
-    width: { ideal: 1366 },
-    height: { ideal: 788 },
-    // resizeMode: 'crop-and-scale'ы,
+    width: { ideal: 1920 },
+    height: { ideal: 1080 },
 };
 export const defVideoParams = {
-    minWidth: 1400,
-    minHeight: 800,
+    minWidth: 1920,
+    minHeight: 1080,
     maxWidth: 4000,
     maxHeight: 4000,
     minFrameRate: 60,
     maxFrameRate: 140,
-    // resizeMode: 'crop-and-scale'ы,
 };

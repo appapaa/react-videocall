@@ -43,7 +43,7 @@ class PeerConnection extends Emitter {
 
     this.mediaDevice
       .on('newstream', (stream, stream0) => {
-        this.pc.addTrack(stream.getTracks()[0], stream0);
+        this.pc.addTrack(stream.getVideoTracks()[0], stream0);
         // this.emit('localStream', stream);
         this.createOffer();
       });

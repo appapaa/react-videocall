@@ -6,6 +6,7 @@ import Emitter from './Emitter';
  * Manage all media devices
  */
 class MediaDevice extends Emitter {
+  stream1 = null
   /**
    * Start media devices and send stream
    */
@@ -52,8 +53,9 @@ class MediaDevice extends Emitter {
   }
   setConstructor(constraints) {
     const v = constraints.video;
-    this.stream.getVideoTracks()[1].applyConstraints({
+    this.stream1.getVideoTracks()[0].applyConstraints({
       frameRate: {
+        min: v.minFrameRate,
         ideal: v.minFrameRate,
         max: v.maxFrameRate,
       },
@@ -64,7 +66,8 @@ class MediaDevice extends Emitter {
       height: {
         ideal: v.minHeight,
         max: v.maxHeight,
-      }
+      },
+      resizeMode: 'none',
     });
 
     return this;
@@ -76,6 +79,7 @@ class MediaDevice extends Emitter {
         audio: true
       })
       .then((stream) => {
+        this.stream1 = stream;
         this.emit('newstream', stream, this.stream);
       })
     return this;
